@@ -1,0 +1,24 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    compileAvro {
+        description = 'Compiles Avro schemas'
+        transitive = false
+    }
+}
+
+dependencies {
+    compileAvro 'org.apache.avro:avro-tools:1.7.5'
+    compile 'org.apache.avro:avro:1.7.5'
+}
+
+task generateAvro(type: JavaExec) {
+    main = '-jar'
+    args = [configurations.compileAvro.asPath, 'compile', 'schema', 'src/main/resources/avro/schema.avsc', sourceSets.main.java.srcDirs.path[0]]
+}
+
+compileJava.dependsOn(generateAvro)
