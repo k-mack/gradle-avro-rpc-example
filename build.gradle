@@ -1,4 +1,8 @@
 apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = '1.6'
+targetCompatibility = '1.6'
 
 repositories {
     mavenCentral()
@@ -13,12 +17,26 @@ configurations {
 
 dependencies {
     compileAvro 'org.apache.avro:avro-tools:1.7.5'
+    
     compile 'org.apache.avro:avro:1.7.5'
+    compile 'org.apache.avro:avro-ipc:1.7.5'
+    
+    testCompile 'junit:junit:4.11'
 }
 
-task generateAvro(type: JavaExec) {
-    main = '-jar'
-    args = [configurations.compileAvro.asPath, 'compile', 'schema', 'src/main/resources/avro/schema.avsc', sourceSets.main.java.srcDirs.path[0]]
+task generateAvro {
+    javaexec {
+        main = '-jar'
+        args = [configurations.compileAvro.asPath, 'compile', 'schema', 'src/main/resources/avro/data.avsc', sourceSets.main.java.srcDirs.path[0]]
+    }
+    javaexec {
+        main = '-jar'
+        args = [configurations.compileAvro.asPath, 'idl', 'src/main/resources/avro/protocol.avdl', 'src/main/resources/avro/protocol.avpr']
+    }
+    javaexec {
+        main = '-jar'
+        args = [configurations.compileAvro.asPath, 'compile', 'protocol', 'src/main/resources/avro/protocol.avpr', sourceSets.main.java.srcDirs.path[0]]
+    }
 }
 
 compileJava.dependsOn(generateAvro)

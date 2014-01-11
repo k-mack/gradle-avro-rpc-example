@@ -1,0 +1,53 @@
+{
+  "protocol" : "DataProtocol",
+  "namespace" : "avro.generated",
+  "types" : [ {
+    "type" : "record",
+    "name" : "User",
+    "fields" : [ {
+      "name" : "firstName",
+      "type" : [ "string", "null" ]
+    }, {
+      "name" : "lastName",
+      "type" : [ "string", "null" ]
+    }, {
+      "name" : "nickName",
+      "type" : [ "string", "null" ]
+    }, {
+      "name" : "email",
+      "type" : [ "string", "null" ]
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "Restaurant",
+    "fields" : [ {
+      "name" : "name",
+      "type" : [ "string", "null" ]
+    }, {
+      "name" : "phone",
+      "type" : [ "string", "null" ]
+    }, {
+      "name" : "address",
+      "type" : [ "string", "null" ]
+    }, {
+      "name" : "cuisines",
+      "type" : [ "string", "null" ]
+    } ]
+  } ],
+  "messages" : {
+    "retrieveUser" : {
+      "request" : [ {
+        "name" : "email",
+        "type" : "string"
+      } ],
+      "response" : "User"
+    },
+    "retrieveRestaurant" : {
+      "request" : [ {
+        "name" : "name",
+        "type" : "string"
+      } ],
+      "response" : "Restaurant"
+    }
+  }
+}
