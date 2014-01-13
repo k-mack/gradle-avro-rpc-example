@@ -4,12 +4,15 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
 import org.apache.avro.AvroRemoteException;
 import org.apache.avro.ipc.Callback;
+import org.apache.avro.ipc.HttpServer;
+import org.apache.avro.ipc.HttpTransceiver;
 import org.apache.avro.ipc.NettyServer;
 import org.apache.avro.ipc.NettyTransceiver;
 import org.apache.avro.ipc.specific.SpecificRequestor;
@@ -78,7 +81,7 @@ public class DataProtocolTest {
 
     @Test
     public void testNettyErrorResponse() throws IOException {
-        final NettyServer server = new NettyServer(new SpecificResponder(
+        NettyServer server = new NettyServer(new SpecificResponder(
                 DataProtocol.class, new ProtocolImpl()), SERVER_ADDRESS);
         server.start();
         System.out.println("SERVER: listening on " + SERVER_ADDRESS);
@@ -105,6 +108,80 @@ public class DataProtocolTest {
         simulateClientRunning();
 
         client.close(true);
+        while (client.isConnected());
+        server.close();
+    }
+
+    @Test
+    public void testHttpSuccessResponse() throws IOException {
+        HttpServer server = new HttpServer(new SpecificResponder(
+                DataProtocol.class, new ProtocolImpl()),
+                SERVER_ADDRESS.getHostName(), SERVER_ADDRESS.getPort());
+        server.start();
+        System.out.println("SERVER: listening on " + SERVER_ADDRESS);
+
+        HttpTransceiver client = new HttpTransceiver(
+                new URL("http://" + SERVER_ADDRESS.getHostName() + ":"
+                        + SERVER_ADDRESS.getPort()));
+
+        DataProtocol.Callback call = SpecificRequestor.getClient(
+                DataProtocol.Callback.class, client);
+
+        call.retrieveUser("jOhNdOe123@GmAiL.cOm", new Callback<User>() {
+            @Override
+            public void handleResult(User result) {
+                System.out.println("CLIENT: found " + result);
+                assertTrue(result.getFirstName().equals("John"));
+                assertTrue(result.getLastName().equals("Doe"));
+                assertTrue(result.getNickName().equals("JD"));
+            }
+
+            @Override
+            public void handleError(Throwable error) {
+                System.out.println("CLIENT: error " + error);
+                fail();
+            }
+        });
+
+        simulateClientRunning();
+
+        client.close();
+        while (client.isConnected());
+        server.close();
+    }
+
+    @Test
+    public void testHttpErrorResponse() throws IOException {
+        HttpServer server = new HttpServer(new SpecificResponder(
+                DataProtocol.class, new ProtocolImpl()),
+                SERVER_ADDRESS.getHostName(), SERVER_ADDRESS.getPort());
+        server.start();
+        System.out.println("SERVER: listening on " + SERVER_ADDRESS);
+
+        HttpTransceiver client = new HttpTransceiver(
+                new URL("http://" + SERVER_ADDRESS.getHostName() + ":"
+                        + SERVER_ADDRESS.getPort()));
+
+        DataProtocol.Callback call = SpecificRequestor.getClient(
+                DataProtocol.Callback.class, client);
+
+        call.retrieveUser("jOhNdOe@GmAiL.cOm", new Callback<User>() {
+            @Override
+            public void handleResult(User result) {
+                System.out.println("CLIENT: found " + result);
+                fail();
+            }
+
+            @Override
+            public void handleError(Throwable error) {
+                System.out.println("CLIENT: error " + error);
+                assertTrue(true);
+            }
+        });
+
+        simulateClientRunning();
+
+        client.close();
         while (client.isConnected());
         server.close();
     }
