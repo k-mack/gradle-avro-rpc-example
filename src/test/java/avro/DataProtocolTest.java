@@ -72,6 +72,7 @@ public class DataProtocolTest {
         simulateClientRunning();
 
         client.close(true);
+        while (client.isConnected());
         server.close();
     }
 
@@ -104,6 +105,7 @@ public class DataProtocolTest {
         simulateClientRunning();
 
         client.close(true);
+        while (client.isConnected());
         server.close();
     }
 
