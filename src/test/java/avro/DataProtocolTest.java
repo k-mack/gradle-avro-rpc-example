@@ -69,24 +69,7 @@ public class DataProtocolTest {
             }
         });
 
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
+        simulateClientRunning();
 
         client.close(true);
         server.close();
@@ -118,27 +101,31 @@ public class DataProtocolTest {
             }
         });
 
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
-        System.out.println("CLIENT: .");
+        simulateClientRunning();
 
         client.close(true);
         server.close();
+    }
+
+    private static void simulateClientRunning() {
+        System.out.println("CLIENT: .");
+        System.out.println("CLIENT: .");
+        System.out.println("CLIENT: .");
+        System.out.println("CLIENT: .");
+        System.out.println("CLIENT: .");
+        System.out.println("CLIENT: .");
+        System.out.println("CLIENT: .");
+        System.out.println("CLIENT: .");
+        System.out.println("CLIENT: .");
+        System.out.println("CLIENT: .");
+        System.out.println("CLIENT: .");
+        System.out.println("CLIENT: .");
+        System.out.println("CLIENT: .");
+        System.out.println("CLIENT: .");
+        System.out.println("CLIENT: .");
+        System.out.println("CLIENT: .");
+        System.out.println("CLIENT: .");
+        System.out.println("CLIENT: .");
     }
 
 }
