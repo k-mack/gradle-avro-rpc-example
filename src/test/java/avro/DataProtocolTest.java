@@ -42,7 +42,7 @@ public class DataProtocolTest {
     }
 
     @Test
-    public void testUserSuccessResponse() throws IOException {
+    public void testNettySuccessResponse() throws IOException {
         NettyServer server = new NettyServer(new SpecificResponder(
                 DataProtocol.class, new ProtocolImpl()), SERVER_ADDRESS);
         server.start();
@@ -93,7 +93,7 @@ public class DataProtocolTest {
     }
 
     @Test
-    public void testUserErrorResponse() throws IOException {
+    public void testNettyErrorResponse() throws IOException {
         final NettyServer server = new NettyServer(new SpecificResponder(
                 DataProtocol.class, new ProtocolImpl()), SERVER_ADDRESS);
         server.start();
