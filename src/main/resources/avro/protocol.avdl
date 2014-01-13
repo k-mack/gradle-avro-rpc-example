@@ -3,5 +3,4 @@ protocol DataProtocol {
     import schema "data.avsc";
     
     avro.generated.User retrieveUser(string email);
-    avro.generated.Restaurant retrieveRestaurant(string name);
 }

@@ -17,22 +17,6 @@
       "name" : "email",
       "type" : [ "string", "null" ]
     } ]
-  }, {
-    "type" : "record",
-    "name" : "Restaurant",
-    "fields" : [ {
-      "name" : "name",
-      "type" : [ "string", "null" ]
-    }, {
-      "name" : "phone",
-      "type" : [ "string", "null" ]
-    }, {
-      "name" : "address",
-      "type" : [ "string", "null" ]
-    }, {
-      "name" : "cuisines",
-      "type" : [ "string", "null" ]
-    } ]
   } ],
   "messages" : {
     "retrieveUser" : {
@@ -41,13 +25,6 @@
         "type" : "string"
       } ],
       "response" : "User"
-    },
-    "retrieveRestaurant" : {
-      "request" : [ {
-        "name" : "name",
-        "type" : "string"
-      } ],
-      "response" : "Restaurant"
     }
   }
 }

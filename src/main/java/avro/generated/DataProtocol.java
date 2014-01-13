@@ -8,14 +8,12 @@ package avro.generated;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public interface DataProtocol {
-  public static final org.apache.avro.Protocol PROTOCOL = org.apache.avro.Protocol.parse("{\"protocol\":\"DataProtocol\",\"namespace\":\"avro.generated\",\"types\":[{\"type\":\"record\",\"name\":\"User\",\"fields\":[{\"name\":\"firstName\",\"type\":[\"string\",\"null\"]},{\"name\":\"lastName\",\"type\":[\"string\",\"null\"]},{\"name\":\"nickName\",\"type\":[\"string\",\"null\"]},{\"name\":\"email\",\"type\":[\"string\",\"null\"]}]},{\"type\":\"record\",\"name\":\"Restaurant\",\"fields\":[{\"name\":\"name\",\"type\":[\"string\",\"null\"]},{\"name\":\"phone\",\"type\":[\"string\",\"null\"]},{\"name\":\"address\",\"type\":[\"string\",\"null\"]},{\"name\":\"cuisines\",\"type\":[\"string\",\"null\"]}]}],\"messages\":{\"retrieveUser\":{\"request\":[{\"name\":\"email\",\"type\":\"string\"}],\"response\":\"User\"},\"retrieveRestaurant\":{\"request\":[{\"name\":\"name\",\"type\":\"string\"}],\"response\":\"Restaurant\"}}}");
+  public static final org.apache.avro.Protocol PROTOCOL = org.apache.avro.Protocol.parse("{\"protocol\":\"DataProtocol\",\"namespace\":\"avro.generated\",\"types\":[{\"type\":\"record\",\"name\":\"User\",\"fields\":[{\"name\":\"firstName\",\"type\":[\"string\",\"null\"]},{\"name\":\"lastName\",\"type\":[\"string\",\"null\"]},{\"name\":\"nickName\",\"type\":[\"string\",\"null\"]},{\"name\":\"email\",\"type\":[\"string\",\"null\"]}]}],\"messages\":{\"retrieveUser\":{\"request\":[{\"name\":\"email\",\"type\":\"string\"}],\"response\":\"User\"}}}");
   avro.generated.User retrieveUser(java.lang.CharSequence email) throws org.apache.avro.AvroRemoteException;
-  avro.generated.Restaurant retrieveRestaurant(java.lang.CharSequence name) throws org.apache.avro.AvroRemoteException;
 
   @SuppressWarnings("all")
   public interface Callback extends DataProtocol {
     public static final org.apache.avro.Protocol PROTOCOL = avro.generated.DataProtocol.PROTOCOL;
     void retrieveUser(java.lang.CharSequence email, org.apache.avro.ipc.Callback<avro.generated.User> callback) throws java.io.IOException;
-    void retrieveRestaurant(java.lang.CharSequence name, org.apache.avro.ipc.Callback<avro.generated.Restaurant> callback) throws java.io.IOException;
   }
 }

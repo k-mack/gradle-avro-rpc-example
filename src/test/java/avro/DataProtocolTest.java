@@ -17,7 +17,6 @@ import org.apache.avro.ipc.specific.SpecificResponder;
 import org.junit.Test;
 
 import avro.generated.DataProtocol;
-import avro.generated.Restaurant;
 import avro.generated.User;
 
 public class DataProtocolTest {
@@ -39,12 +38,6 @@ public class DataProtocolTest {
         public User retrieveUser(CharSequence email) throws AvroRemoteException {
             System.out.println("SERVER: looking through backend...");
             return backend.get(email.toString().toLowerCase(Locale.ENGLISH));
-        }
-
-        @Override
-        public Restaurant retrieveRestaurant(CharSequence name)
-                throws AvroRemoteException {
-            return null;
         }
     }
 
